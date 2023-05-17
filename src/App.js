@@ -1,54 +1,46 @@
-import logo from "./logo.svg";
+/* eslint-disable react/jsx-filename-extension */
 import "./App.css";
-import GPTEditor from "./components/editor.js";
-import PromptInput from "./components/PromptInput.js";
-import { useState } from "react";
+import { useState, React } from "react";
 import { Button, Col, Container } from "react-bootstrap";
 import Row from "react-bootstrap/Row";
+import PromptInput from "./components/PromptInput";
+import GPTEditor from "./components/editor";
+import sendPrompt from "./PromptController";
+
 function App() {
-  const [prompt, setPrompt] = useState("");
-  var OPENAI_API_KEY = "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";
-  const promtpConfig =
-    ' replace "useState" with "React.useState", delete export & import statements, Only respond with code';
-  async function sendPrompt() {
-    await fetch("https://api.openai.com/v1/chat/completions", {
-      method: "POST",
-      body: JSON.stringify({
-        model: "gpt-3.5-turbo-0301",
-        prompt: prompt + promtpConfig,
-      }),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-        Authorization: "Bearer " + OPENAI_API_KEY,
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }
+  const [prompts, addPrompt] = useState([]);
+  const [gptCode, setCode] = useState("<h1></h1>");
+  const [lastPrompt, setLastPrompt] = useState("");
   return (
     <div className="App">
       <header className="App-header">
         <Container>
           <Row>
             <Col>
-              <PromptInput prompt={prompt} setPrompt={setPrompt}></PromptInput>{" "}
+              <PromptInput setPrompt={setLastPrompt} currentPrompts={prompts} />
               <Button
                 title="Generate"
                 variant="primary"
                 onClick={() => {
-                  sendPrompt();
+                  sendPrompt({
+                    prompts: [
+                      ...prompts,
+                      lastPrompt,
+                    ],
+                    setCode: setCode,
+                  });
+                  addPrompt((previousPrompt) => [
+                    ...previousPrompt,
+                    lastPrompt,
+                  ]);
+
                 }}
               >
                 Generate
               </Button>
             </Col>
             <Col>
-              <GPTEditor></GPTEditor>
+              <GPTEditor code={gptCode} setCode={setCode} />
             </Col>
           </Row>
         </Container>

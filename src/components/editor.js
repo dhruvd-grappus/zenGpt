@@ -1,7 +1,10 @@
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import React from "react";
+import PropTypes from "prop-types";
+
 import { useState } from "react";
-export default function GPTEditor() {
+export default function GPTEditor(props) {
+  
   return (
     <div
       style={{
@@ -9,8 +12,8 @@ export default function GPTEditor() {
         gap: "100px",
       }}
     >
-      <LiveProvider code="<h1></h1>" scope={{ React, useState }}>
-        <LiveEditor />
+      <LiveProvider code={props.code} scope={{ React, useState }}>
+        <LiveEditor onChange={(s) => props.setCode(s)} />
         <div
           className="square border border-success"
           style={{
@@ -25,3 +28,7 @@ export default function GPTEditor() {
     </div>
   );
 }
+GPTEditor.propTypes = {
+  code: PropTypes.string,
+  setCode: PropTypes.func,
+};
