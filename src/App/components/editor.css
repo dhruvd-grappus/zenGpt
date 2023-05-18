@@ -1,0 +1,26 @@
+.editor-preview {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin-bottom: 100px;
+}
+.code-editor {
+  overflow: auto;
+
+  min-width: 60vh;
+  max-width: 60vh;
+
+ 
+}
+.preview {
+  display: block;
+  border: 2px solid green;
+
+  padding: 2px;
+  max-height: 400px;
+  min-width: 60vh;
+  max-width: 60vh;
+}

@@ -10,10 +10,7 @@ function PromptInput(props) {
   }
 
   return (
-    <label>
-      Write your prompt:
-      <textarea name="postContent" rows={4} cols={40} onChange={handleChange} />
-    </label>
+    <textarea name="postContent" rows={4} cols={40} onChange={handleChange} />
   );
 }
 PromptInput.propTypes = {
