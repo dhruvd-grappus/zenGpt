@@ -37,7 +37,7 @@ function App() {
         <GPTEditor code={gptCode} setCode={setCode} />
         <div style={{flex:2,padding:'100px'}}></div>
       </div>
-
+    <footer></footer>
     </div>
   );
 }

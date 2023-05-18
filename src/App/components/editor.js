@@ -7,9 +7,10 @@ export default function GPTEditor(props) {
   return (
     <LiveProvider code={props.code} scope={{ React, useState }}>
       <div className="editor-preview">
-        <div className="code-editor">
-          <LiveEditor onChange={(s) => props.setCode(s)} />
-        </div>
+        <LiveEditor
+          className="code-editor"
+          onChange={(s) => props.setCode(s)}
+        />
 
         <div className="preview">
           <LivePreview />

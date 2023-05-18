@@ -10,7 +10,9 @@ function PromptInput(props) {
   }
 
   return (
-    <textarea name="postContent" rows={4} cols={40} onChange={handleChange} />
+    <textarea
+    style={{fontSize:'14px'}}
+    name="postContent" rows={2} cols={50} onChange={handleChange} />
   );
 }
 PromptInput.propTypes = {
