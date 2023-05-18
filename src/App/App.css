@@ -8,7 +8,7 @@
   margin-left: 50px;
   margin-right: 10px;
   flex-direction: row;
-  justify-content:start;
+  justify-content:flex-start;
   font-size: calc(10px + 2vmin);
   color: white;
   margin-bottom: 100px;
