@@ -1,6 +1,10 @@
+import env from "react-dotenv";
+
 export default async function sendPrompt({ prompts, setCode }) {
   console.log(prompts);
-  const OPENAI_API_KEY = "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";
+  var e=env;
+  console.log(e)
+  const OPENAI_API_KEY = e.OPENAI_API_KEY;
   const promptConfig =
   " in react , use inline css, delete export & import statements, Only respond with code as plain text without code block syntax or explanation around it";
   const messages = [...prompts,promptConfig].map((p) => ({
