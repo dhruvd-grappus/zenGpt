@@ -1,15 +1,15 @@
 import env from "react-dotenv";
-
-export default async function sendPrompt({ prompts, setCode }) {
+export const promptConfig =
+  "use react , use inline css, dont use lambda function instead use the function keyword, Only respond with code as plain text without code block syntax or explanation around it";
+export  async function sendPrompt({ prompts, setCode }) {
   console.log(prompts);
-  var e=env;
-  console.log(e)
+  var e = env;
+  console.log(e);
   const OPENAI_API_KEY = e.OPENAI_API_KEY;
-  const promptConfig =
-  " in react , use inline css, delete export & import statements, Only respond with code as plain text without code block syntax or explanation around it";
-  const messages = [...prompts,promptConfig].map((p) => ({
+
+  const messages = [...prompts, promptConfig].map((p) => ({
     role: "user",
-    content: p
+    content: p,
   }));
   console.log(messages);
   await fetch("https://api.openai.com/v1/chat/completions", {
@@ -23,8 +23,17 @@ export default async function sendPrompt({ prompts, setCode }) {
       Authorization: `Bearer ${OPENAI_API_KEY}`,
     },
   })
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.status != 200) {
+        alert("API:" + response.status);
+        return;
+      }
+      return response.json();
+    })
     .then((data) => {
+      if (data == null) {
+        return;
+      }
       try {
         const code = data.choices[0].message.content;
         setCode(code);
