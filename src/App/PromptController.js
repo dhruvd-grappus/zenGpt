@@ -1,13 +1,15 @@
 import env from "react-dotenv";
 export const promptConfig =
-  "use react , use inline css, dont use lambda function instead use the function keyword, Only respond with code as plain text without code block syntax or explanation around it";
-export  async function sendPrompt({ prompts, setCode }) {
+  "use react , use inline css, Only respond with code as plain text without code block syntax or explanation around it";
+export const noLambda="dont use lambda notation, use the function keyword"
+export const noComponent="dont use Component, use function ()"
+  export async function sendPrompt({ prompts, setCode }) {
   console.log(prompts);
   var e = env;
   console.log(e);
   const OPENAI_API_KEY = e.OPENAI_API_KEY;
 
-  const messages = [...prompts, promptConfig].map((p) => ({
+  const messages = [...prompts, promptConfig,noLambda,noComponent].map((p) => ({
     role: "user",
     content: p,
   }));

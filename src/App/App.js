@@ -4,7 +4,7 @@ import { useState, React } from "react";
 
 import PromptInput from "./components/PromptInput";
 import GPTEditor from "./components/editor";
-import { sendPrompt, promptConfig } from "./PromptController";
+import { sendPrompt, promptConfig ,noLambda,noComponent} from "./PromptController";
 
 function App() {
   const [prompts, addPrompt] = useState([]);
@@ -14,7 +14,7 @@ function App() {
   const listItems =
     prompts.length == 0
       ? []
-      : [...prompts, promptConfig].map((d) => (
+      : [...prompts, promptConfig,noLambda,noComponent].map((d) => (
           <ol type="1" key={d}>
             {d}
           </ol>

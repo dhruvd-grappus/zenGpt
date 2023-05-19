@@ -2,7 +2,7 @@ import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
 import React from "react";
 import PropTypes from "prop-types";
 import "./editor.css";
-import { useState } from "react";
+import { useState, Component } from "react";
 function filterMultilineString(str) {
   var lines = str.split('\n');
 
@@ -26,7 +26,7 @@ function filterMultilineString(str) {
 export default function GPTEditor(props) {
   var filteredCode = filterMultilineString(props.code);
   return (
-    <LiveProvider code={filteredCode} scope={{ React, useState }}>
+    <LiveProvider code={filteredCode}  scope={{ React, useState, Component }}>
       <div className="editor-preview">
         <LiveEditor
           className="code-editor"
