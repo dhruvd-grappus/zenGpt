@@ -1,10 +1,8 @@
-import {  React } from "react";
+import { React } from "react";
 import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 import Spinner from "react-bootstrap/Spinner";
 function PromptInput(props) {
-
-
   function handleChange(e) {
     const inputValue = e.target.value;
     const { setPrompt } = props;
@@ -23,7 +21,6 @@ function PromptInput(props) {
           maxWidth: "100px",
         }}
         onClick={() => {
-
           props.onGenerate();
         }}
       >
@@ -32,9 +29,10 @@ function PromptInput(props) {
     );
   }
   return (
-    <form>
+    <form className={"flex flex-col gap-[20px] items-center"}>
       <textarea
-        style={{ fontSize: "14px" }}
+        className={"text-[14px] text-black p-2"}
+        // style={{ fontSize: "14px" }}
         name="postContent"
         rows={2}
         cols={50}
@@ -48,6 +46,6 @@ function PromptInput(props) {
 PromptInput.propTypes = {
   setPrompt: PropTypes.func.isRequired,
   onGenerate: PropTypes.func.isRequired,
-  loading:PropTypes.bool
+  loading: PropTypes.bool,
 };
 export default PromptInput;
