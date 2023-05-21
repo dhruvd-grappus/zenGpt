@@ -1,9 +1,9 @@
-import { LiveProvider, LiveEditor, LiveError, LivePreview } from "react-live";
+import { LiveProvider, LiveEditor, } from "react-live";
 import React from "react";
 import PropTypes from "prop-types";
 import "./editor.css";
 import { useState, Component } from "react";
-import ActionBarIcons from "../components/ActionBarIcons";
+import { CodePreview } from "./preview";
 
 function filterMultilineString(str) {
   var lines = str.split("\n");
@@ -35,15 +35,7 @@ export default function GPTEditor(props) {
           onChange={(s) => props.setCode(s)}
         />
 
-        <div className="preview">
-          <div className="browerTitle flex gap-[5px] justify-end bg-[gray] p-2">
-            <ActionBarIcons path="/icons/close.png" alt="close-icon" />
-            <ActionBarIcons path="/icons/maximize.png" alt="maximize-icon" />
-            <ActionBarIcons path="/icons/minimize.png" alt="minimize-icon" />
-          </div>
-          <LivePreview />
-          <LiveError style={{ color: "red", fontSize: "12px" }} />
-        </div>
+       <CodePreview></CodePreview>
       </div>
     </LiveProvider>
   );
