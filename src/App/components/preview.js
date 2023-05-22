@@ -6,7 +6,7 @@ export const CodePreview = () => {
   const [isMax, setMax] = useState(false);
   var basePreview = (
     <div className="preview">
-      <div className="browerTitle flex gap-[5px] justify-end bg-[gray] p-2">
+      <div className="browserTitle flex gap-[5px] justify-end bg-[gray] p-2">
         <ActionBarIcons
           path="/icons/close.png"
           alt="close-icon"

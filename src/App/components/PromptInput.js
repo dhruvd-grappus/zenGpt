@@ -5,32 +5,50 @@ import Spinner from "react-bootstrap/Spinner";
 function PromptInput(props) {
   function handleChange(e) {
     const inputValue = e.target.value;
-    const { setPrompt } = props;
     const updatedPrompt = inputValue;
-    setPrompt(updatedPrompt);
+    props.setLastPrompt(updatedPrompt);
   }
   var button = <div></div>;
   if (props.loading) {
     button = <Spinner animation="grow" />;
   } else {
     button = (
-      <Button
-        title="Generate"
-        variant="primary"
-        style={{
-          maxWidth: "100px",
-        }}
-        onClick={() => {
-          props.onGenerate();
-        }}
-      >
-        Generate
-      </Button>
+      <div className={"gap-2 flex flex-row"}>
+        <Button
+          title="Generate"
+          variant="primary"
+          className="my-[10px]"
+          style={{
+            maxWidth: "100px",
+          }}
+          onClick={() => {
+            props.setLastPrompt("");
+            props.onGenerate();
+          }}
+        >
+          Generate
+        </Button>
+        <Button
+          title="Generate"
+          variant="primary"
+          className="my-[10px]"
+          style={{
+            maxWidth: "100px",
+          }}
+          onClick={() => {
+            props.setLastPrompt("");
+            props.setPrompts([]);
+          }}
+        >
+          Reset
+        </Button>
+      </div>
     );
   }
   return (
     <form className={"flex flex-col gap-[20px] items-center"}>
       <textarea
+        value={props.lastPrompt}
         className={"text-[14px] text-black p-2"}
         // style={{ fontSize: "14px" }}
         name="postContent"
@@ -44,8 +62,10 @@ function PromptInput(props) {
   );
 }
 PromptInput.propTypes = {
-  setPrompt: PropTypes.func.isRequired,
+  setLastPrompt: PropTypes.func.isRequired,
   onGenerate: PropTypes.func.isRequired,
   loading: PropTypes.bool,
+  lastPrompt: PropTypes.string,
+  setPrompts: PropTypes.func.isRequired,
 };
 export default PromptInput;

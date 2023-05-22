@@ -1,4 +1,4 @@
-import { LiveProvider, LiveEditor, } from "react-live";
+import { LiveProvider, LiveEditor } from "react-live";
 import React from "react";
 import PropTypes from "prop-types";
 import "./editor.css";
@@ -8,12 +8,16 @@ import { CodePreview } from "./preview";
 function filterMultilineString(str) {
   var lines = str.split("\n");
 
-  // Remove the line with "jsx" in it
   lines = lines.filter((line) => !line.includes("jsx"));
   lines = lines.filter((line) => !line.includes("example"));
   lines = lines.filter((line) => !line.includes("AI"));
   lines = lines.filter((line) => !line.includes("Here"));
+  lines = lines.filter((line) => !line.includes("Note:"));
+  lines = lines.filter((line) => !line.includes("Sure,"));
+
   // Remove all lines starting with import
+  lines = lines.filter((line) => !line.trim().startsWith("```jsx"));
+
   lines = lines.filter((line) => !line.trim().startsWith("import"));
 
   // Remove all lines starting with export
@@ -35,7 +39,7 @@ export default function GPTEditor(props) {
           onChange={(s) => props.setCode(s)}
         />
 
-       <CodePreview></CodePreview>
+        <CodePreview></CodePreview>
       </div>
     </LiveProvider>
   );
